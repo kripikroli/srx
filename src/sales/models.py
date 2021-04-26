@@ -4,6 +4,7 @@ from customers.models import Customer
 from profiles.models import Profile
 from django.utils import timezone
 from .utils import generate_code
+from django.shortcuts import reverse
 
 class Position(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -14,6 +15,10 @@ class Position(models.Model):
     def save(self, *args, **kwargs):
         self.price = self.product.price * self.quantity
         return super().save(*args, **kwargs)
+
+    def get_sales_id(self):
+        sale_obj = self.sale_set.first()
+        return sale_obj.id
 
     def __str__(self):
         return f"{self.id}, product: {self.product.name}, quantity: {self.quantity}"
@@ -26,6 +31,9 @@ class Sale(models.Model):
     salesman = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created_at = models.DateTimeField(blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('sales:detail', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         if self.transaction_id == "":
