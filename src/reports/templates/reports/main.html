@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+Reports
+{% endblock title %}
+
+{% block content %}
+Reports
+<hr>
+<br>
+{% for obj in object_list %}
+
+    <div class="card mb-5">
+        <div class="card-image">
+            <figure class="image">
+            <img src="{{obj.image.url}}" alt="{{obj.name}}">
+            </figure>
+        </div>
+        <div class="card-content">
+            <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                <img src="{{obj.author.profiles.avatar}}" alt="">
+                </figure>
+            </div>
+            <div class="media-content">
+                <p class="title is-4">{{obj.name}}</p>
+                <p class="subtitle is-6">{{obj.author}}</p>
+            </div>
+            </div>
+
+            <div class="content">
+                <p>{{obj.remarks|truncatewords:10}}</p>
+            </div>
+        </div>
+        <div class="buttons mb-5 ml-5">
+            <a style="text-decoration:none;" href="{{obj.get_absolute_url}}" class="button is-success">View details</a>
+            <a style="text-decoration:none;" href="" class="button is-danger">Print as PDF</a>
+        </div>
+    </div>
+{% endfor %}
+{% endblock content %}
