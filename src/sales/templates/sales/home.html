@@ -27,6 +27,9 @@
     <br>
     Grouped By Data Frame
     {{ df |safe}}
+    <br>
+    Chart 
+    <img src="data:image/png;base64, {{chart|safe}}">
 {% else %}
     <h3 class="title">No data</h3>
 {% endif %}

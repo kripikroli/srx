@@ -1,9 +1,9 @@
 from django import forms
 
 CHART_CHOICES = (
-    ('#1', 'Bar chart'),
-    ('#2', 'Pie chart'),
-    ('#3', 'Line chart')
+    ('barchart', 'Bar chart'),
+    ('piechart', 'Pie chart'),
+    ('linechart', 'Line chart')
 )
 class SalesSearchForm(forms.Form):
     date_from = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
