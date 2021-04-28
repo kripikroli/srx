@@ -35,7 +35,7 @@ Reports
         </div>
         <div class="buttons mb-5 ml-5">
             <a style="text-decoration:none;" href="{{obj.get_absolute_url}}" class="button is-success">View details</a>
-            <a style="text-decoration:none;" href="" class="button is-danger">Print as PDF</a>
+            <a target="_blank" style="text-decoration:none;" href="{% url 'reports:pdf' obj.pk %}" class="button is-danger">Print as PDF</a>
         </div>
     </div>
 {% endfor %}

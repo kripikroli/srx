@@ -1,0 +1,10 @@
+.dz {
+    border-style: dashed;
+    border-radius: 5px;
+    border-color: #ddd;
+    transition: .5s;
+}
+
+.dz:hover {
+    background-color: #f5f5f5;
+}

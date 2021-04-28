@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>PDF {{obj.name}}</title>
+  <style>
+  </style>
+</head>
+<body>
+    <h1 class="title">{{obj.name}}</h1>
+    <hr>
+    <img src="{{obj.image.path}}" class="image">
+    <br>
+    <h3 class="subtitle">Remarks</h3>
+    <p>{{obj.remarks}}</p>
+    <hr>
+    <p>Author: <strong>{{obj.author.user.username}}</strong>
+    <br>Created: <strong>{{obj.created_at}}</strong></p>
+</body>
+</html>

@@ -50,8 +50,8 @@ class Sale(models.Model):
         return f"Sales amount: {self.total_price}"
 
 class CSV(models.Model):
-    file_name = models.FileField(upload_to='csvs')
-    activated = models.BooleanField(default=False)
+    file_name = models.CharField(max_length=120, null=True)
+    csv_file = models.FileField(upload_to='csvs', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
