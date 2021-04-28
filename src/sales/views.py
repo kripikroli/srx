@@ -2,11 +2,15 @@ import pandas as pd
 
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Sale
-from .forms import SalesSearchForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from reports.forms import ReportForm
+from .forms import SalesSearchForm
+from .models import Sale
 from .utils import get_customer_from_id, get_salesman_from_id, get_chart
 
+@login_required
 def home_view(request):
 
     sales_df = None
@@ -81,11 +85,11 @@ def home_view(request):
     }
     return render(request, 'sales/home.html', context)
 
-class SalesListView(ListView):
+class SalesListView(LoginRequiredMixin, ListView):
     model = Sale
     template_name = 'sales/main.html'
 
-class SaleDetailView(DetailView):
+class SaleDetailView(LoginRequiredMixin, DetailView):
     model = Sale
     template_name = 'sales/detail.html'
 

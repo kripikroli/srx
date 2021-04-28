@@ -7,6 +7,8 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import get_template
 from django.views.generic import ListView, DetailView, TemplateView
 from django.utils.dateparse import parse_date
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from profiles.models import Profile
 from sales.models import Sale, Position, CSV
@@ -19,19 +21,19 @@ from .utils import get_report_image
 
 from xhtml2pdf import pisa
 
-class ReportListView(ListView):
+class ReportListView(LoginRequiredMixin, ListView):
     model = Report
     template_name = 'reports/main.html'
 
 
-class ReportDetailView(DetailView):
+class ReportDetailView(LoginRequiredMixin, DetailView):
     model = Report
     template_name = 'reports/detail.html'
 
-class UploadTemplateView(TemplateView):
+class UploadTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'reports/from_file.html'
 
-
+@login_required
 def csv_upload_view(request):
     if request.method == 'POST':
         csv_file_name = request.FILES.get('file').name
@@ -90,7 +92,7 @@ def create_report_view(request):
         return JsonResponse({'msg': 'send'})
     return JsonResponse({'msg': 'not ajax'})
 """
-
+@login_required
 def create_report_view(request):
     form = ReportForm(request.POST or None)
     if request.is_ajax():
@@ -108,7 +110,7 @@ def create_report_view(request):
         return JsonResponse({'msg': 'send'})
     return JsonResponse({'msg': 'not ajax'})
 
-    
+@login_required
 def render_pdf_view(request, pk):
 
     template_path = 'reports/pdf.html'
